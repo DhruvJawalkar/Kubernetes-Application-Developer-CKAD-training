@@ -1,0 +1,23 @@
+kubectl get pods
+kubectl get pods -o wide
+
+kubectl run --help
+kubectl run nginx --image=nginx
+kubectl run redis --image=redis123 --dry-run=client -o yaml
+kubectl run redis --image=redis123 --dry-run=client -o yaml > redis.yaml
+//cat redis.yaml
+kubectl create -f redis.yaml
+//can change config and apply changes as below
+kubectl apply -f redis.yaml
+
+kubectl describe pod nginx
+
+kubectl delete pod nginx
+
+//to extract pod definition to a file
+kubectl get pod <pod-name> -o yaml > pod-definition.yaml
+
+//To modify the properties of the pod
+kubectl edit pod <pod-name>
+
+
