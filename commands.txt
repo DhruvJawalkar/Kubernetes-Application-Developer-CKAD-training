@@ -1,3 +1,7 @@
+minikube start
+minikube stop
+minikube delete --all
+
 kubectl get pods
 kubectl get pods -o wide
 
@@ -20,4 +24,14 @@ kubectl get pod <pod-name> -o yaml > pod-definition.yaml
 //To modify the properties of the pod
 kubectl edit pod <pod-name>
 
+kubectl create -f rc-definition.yml
+kubectl get replicationcontroller
+kubectl delete replicationcontroller myapp-rc
 
+kubectl create -f replicaset-definition.yml
+kubectl get replicaset
+
+kubectl replace -f replicaset-definition.yml
+kubectl scale --replicas=6 -f replicaset-definition.yml
+kubectl scale --replicas=6 replicaset myapp-replicaset
+kubectl edit replicaset myapp-replicaset
