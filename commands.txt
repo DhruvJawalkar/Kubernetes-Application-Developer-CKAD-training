@@ -35,3 +35,51 @@ kubectl replace -f replicaset-definition.yml
 kubectl scale --replicas=6 -f replicaset-definition.yml
 kubectl scale --replicas=6 replicaset myapp-replicaset
 kubectl edit replicaset myapp-replicaset
+
+kubectl explain replicaset
+kubectl delete pod podname_1 podname_2 ...
+
+kubectl create -f deployment-definition.yml
+kubectl get deployments
+kubectl get replicaset
+kubectl get pods
+kubectl explain deployment
+kubectl create deployment --help
+kubectl create deployment --image=nginx nginx --dry-run -o yaml
+kubectl create deployment nginx --image=nginx --replicas=4
+kubectl scale deployment nginx --replicas=4
+kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3
+
+kubectl get all
+
+kubectl create namespace test-123 --dry-run -o yaml
+
+kubectl get namespaces
+kubectl config set-context $(kubectl config current-context) --namespace=dev
+kubectl get pods --namespace=research
+kubectl get pods -n=research
+kubectl run redis --image=redis -n=finance
+kubectl get pods --all-namespaces
+kubectl get pods -A
+
+kubectl create -f compute-quota.yml
+
+kubectl run nginx --image=nginx --dry-run=client -o yaml > nginx-pod.yaml
+
+#Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379
+kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
+kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
+
+#Create a Service named nginx of type NodePort to expose pod nginx's port 80 on port 30080 on the nodes:
+kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort --dry-run=client -o yaml
+kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
+
+#Imperative commands
+kubectl run nginx-pod --image=nginx:alpine --dry-run=client
+kubectl run nginx-pod --image=nginx:alpine --dry-run=client -o yaml > redis-pod.yaml
+kubectl create -f redis-pod.yaml --dry-run=client
+
+kubectl run custom-nginx --image=nginx --port=8080 --dry-run=client -o yaml
+kubectl run --help
+kubectl run httpd --image=httpd:alpine --port=80 --expose=true
+kubectl describe svc httpd
