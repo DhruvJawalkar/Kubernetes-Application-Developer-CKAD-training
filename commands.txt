@@ -83,3 +83,12 @@ kubectl run custom-nginx --image=nginx --port=8080 --dry-run=client -o yaml
 kubectl run --help
 kubectl run httpd --image=httpd:alpine --port=80 --expose=true
 kubectl describe svc httpd
+
+----------------------------------------------------------------------------------------------------------------------------
+Docker commands:
+docker image ls
+docker build -t webapp-color .
+docker run -dp 127.0.0.1:8282:8080 webapp-color
+docker ps -a
+docker image inspect python:3.6
+----------------------------------------------------------------------------------------------------------------------------
