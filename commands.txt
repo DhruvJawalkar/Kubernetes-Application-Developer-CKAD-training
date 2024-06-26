@@ -92,3 +92,8 @@ docker run -dp 127.0.0.1:8282:8080 webapp-color
 docker ps -a
 docker image inspect python:3.6
 ----------------------------------------------------------------------------------------------------------------------------
+
+cat ubuntu-sleeper-2.yaml
+kubectl run --help
+kubectl run webapp-green --image=kodecloud/webapp-color -- --color green
+kubectl run webapp-green --image=kodecloud/webapp-color --command -- python app.py --color green
