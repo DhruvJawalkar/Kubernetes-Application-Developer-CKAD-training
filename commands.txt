@@ -91,9 +91,30 @@ docker build -t webapp-color .
 docker run -dp 127.0.0.1:8282:8080 webapp-color
 docker ps -a
 docker image inspect python:3.6
+
+docker run -e APP_COLOR=pink simple-webapp-color
 ----------------------------------------------------------------------------------------------------------------------------
 
 cat ubuntu-sleeper-2.yaml
 kubectl run --help
 kubectl run webapp-green --image=kodecloud/webapp-color -- --color green
 kubectl run webapp-green --image=kodecloud/webapp-color --command -- python app.py --color green
+
+kubectl create configmap app-config --from-literal=APP_COLOR=blue --from-literal=APP_MOD=prod
+kubectl create configmap app-config --from-file=app_config.properties
+kubectl create -f config-map.yaml
+kubectl get configmaps
+kubectl get cm
+kubectl describe configmaps
+kubectl describe configmap db-config
+
+kubectl create secret generic <secret-name> --from-literal=<key>=<value>
+kubectl create secret generic app-secret --from-literal=DB_HOST=mysql --from-literal=DB_User=root --from-literal=DB_Password=paswrd
+kubectl create secret generic <secret-name> --from-file=<path-to-file>
+kubectl create secret generic app-secret --from-file=app_secret.properties
+kubectl create -f secret-data.yaml
+echo -n 'mysql' | base64
+echo -n 'bXlzcWw=' | base64 --decode
+kubectl get secrets
+kubectl describe secrets
+kubectl get secret app-secret -o yaml
