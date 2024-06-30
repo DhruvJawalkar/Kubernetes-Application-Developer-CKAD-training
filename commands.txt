@@ -119,7 +119,13 @@ echo -n 'bXlzcWw=' | base64 --decode
 kubectl get secrets
 kubectl describe secrets
 kubectl get secret app-secret -o yaml
-
 ps aux
 whoami
 kubectl exec ubuntu-sleeper -- whoami
+
+kubectl create serviceaccount dashboard-sa
+kubectl get serviceaccount
+kubectl describe serviceaccount dashboard-sa
+kubectl describe secret dashboard-sa-token-kbbdm
+kubectl create token dashboard-sa
+
