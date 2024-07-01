@@ -129,3 +129,10 @@ kubectl describe serviceaccount dashboard-sa
 kubectl describe secret dashboard-sa-token-kbbdm
 kubectl create token dashboard-sa
 
+kubectl taint nodes node-name key=value:taint-effect(NoSchedule | PreferNoSchedule | NoExecute)
+kubectl taint nodes node1 app=blue:NoSchedule
+kubectl describe node kubemaster | grep Taint
+kubectl get nodes
+kubectl describe nodes node01
+kubectl taint nodes mynode dedicated- //command removes all the taints with the dedicated key from the mynode node:
+kubectl taint nodes controlplane node-role.kubernetes.io/control-plane- //node/controlplane untainted
