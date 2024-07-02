@@ -136,3 +136,8 @@ kubectl get nodes
 kubectl describe nodes node01
 kubectl taint nodes mynode dedicated- //command removes all the taints with the dedicated key from the mynode node:
 kubectl taint nodes controlplane node-role.kubernetes.io/control-plane- //node/controlplane untainted
+
+kubectl label nodes <node-name> <label-key>=<label-value>
+kubectl label nodes node-1 size=Large
+kubectl describe node node01 | grep Taints
+kubectl edit deployment blue
