@@ -1,0 +1,74 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+# pods "red" was not valid:
+# * spec.initContainers: Forbidden: pod updates may not add or remove containers
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2024-07-03T21:42:27Z"
+  name: red
+  namespace: default
+  resourceVersion: "1011"
+  uid: 04ebe3af-04d0-4952-9d9d-cd2e1a21e866
+spec:
+  initContainers:
+  - image: busybox
+    name: busybox
+    command: ["sleep", "20"]
+  containers:
+  - command:
+    - sh
+    - -c
+    - echo The app is running! && sleep 3600
+    image: busybox:1.28
+    imagePullPolicy: IfNotPresent
+    name: red-container
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-zjwhf
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: controlplane
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-zjwhf
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace

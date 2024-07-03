@@ -141,3 +141,17 @@ kubectl label nodes <node-name> <label-key>=<label-value>
 kubectl label nodes node-1 size=Large
 kubectl describe node node01 | grep Taints
 kubectl edit deployment blue
+
+kubectl run yellow --image=busybox --dry-run=client -o yaml > yellow.yaml
+kubectl -n elastic-stack logs kibana
+kubectl -n elastic-stack get pods app
+kubectl -n elastic-stack exec --stdin --tty app -- /bin/bash
+kubectl -n elastic-stack exec --stdin --tty app -- vi /log/app.log
+kubectl exec shell-demo -- ls /
+kubectl -n elastic-stack exec app -- ls /
+kubectl exec -i -t my-pod --container main-app -- /bin/bash
+kubectl logs app -n elastic-stack
+kubectl -n elastic-stack exec -it app -- cat /log/app.log
+kubectl edit pod app -n elastic-stack
+kubectl replace --force -f /tmp/kubectl-edit-2396878201.yaml
+kubectl logs orange --container init-myservice
