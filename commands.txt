@@ -155,3 +155,17 @@ kubectl -n elastic-stack exec -it app -- cat /log/app.log
 kubectl edit pod app -n elastic-stack
 kubectl replace --force -f /tmp/kubectl-edit-2396878201.yaml
 kubectl logs orange --container init-myservice
+
+docker ps -a
+docker run kodekloud/event-simulator
+docker run -d kodekloud/event-simulator
+docker logs -f ecf
+kubectl create -f event-simulator.yaml
+kubectl logs -f event-simulator-pod event-simulator
+minikube addons enable metrics-server
+git clone https://github.com/kubernetes-sigs/metrics-server
+kubectl create -f deploy/1.8+/
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl top node
+kubectl top pod(s)
+kubectl create -f .
