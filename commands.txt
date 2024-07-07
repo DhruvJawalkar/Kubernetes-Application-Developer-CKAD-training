@@ -169,3 +169,32 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 kubectl top node
 kubectl top pod(s)
 kubectl create -f .
+
+kubectl get pods --selector app=App1
+kubectl rollout status deployment/myapp-deployment
+kubectl rollout history deployment/myapp-deployment
+kubectl apply -f deployment-definition.yaml
+kubectl set image deployment/myapp-deployment nginx-container=nginx:1.9.1
+kubectl describe deployment myapp-deployment
+kubectl get replicasets
+kubectl rollout undo deployment/myapp-deployment
+//create
+kubectl create -f deployment-definition.yaml
+kubectl create deployment nginx --image=nginx1.16
+//get
+kubectl get deployments
+//update
+kubectl apply -f deployment-definition.yaml
+kubectl set image deployment/myapp-deployment nginx=nginx:1.17 --record
+kubectl edit deployments nginx --record
+//status
+kubectl rollout status deployment/myapp-deployment
+kubectl rollout status deployment nginx
+kubectl rollout history deployment/myapp-deployment
+kubectl rollout history deployment nginx (--revision=1)
+kubectl describe deployments nginx | grep -i image:
+//Rollback
+kubectl rollback undo deployment/myapp-deployment
+kubectl rollout undo deployment nginx --to-revision=1
+//Delete
+kubectl delete deployment myapp-deployment
