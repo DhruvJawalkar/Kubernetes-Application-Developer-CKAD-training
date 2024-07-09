@@ -171,6 +171,7 @@ kubectl top pod(s)
 kubectl create -f .
 
 kubectl get pods --selector app=App1
+kubectl get pods -l env=prod,bu=finance,tier=frontend
 kubectl rollout status deployment/myapp-deployment
 kubectl rollout history deployment/myapp-deployment
 kubectl apply -f deployment-definition.yaml
@@ -198,3 +199,22 @@ kubectl rollback undo deployment/myapp-deployment
 kubectl rollout undo deployment nginx --to-revision=1
 //Delete
 kubectl delete deployment myapp-deployment
+kubectl scale deployment --replicas=1 frontend-v2
+
+docker ps -a
+kubectl create -f job-definition.yaml
+kubectl create job throw-dice-job --image=kodekloud/throw-dice
+kubectl get jobs
+https://kubernetes.io/docs/concepts/workloads/controllers/job/
+kubectl get pods
+kubectl logs math-add-job-ld87pn
+kubectl delete job math-add-job
+//Cron job specification syntax
+* * * * * command to execute (minute (0-59), hour(0-23), day of the month(1-31), month(1-12), day of the week(0-6))
+/*
+"* * * * *" - every minute
+"0 0 13 * 5" states that the task must be started every Friday at midnight, as well as on the 13th of each month at midnight.
+https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+*/
+kubectl create -f cron-job-definition.yaml
+kubectl get cronjob
