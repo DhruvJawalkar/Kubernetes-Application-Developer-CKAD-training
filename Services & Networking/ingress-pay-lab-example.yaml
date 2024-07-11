@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  creationTimestamp: "2024-07-11T22:18:25Z"
+  generation: 1
+  name: ingress-pay
+  namespace: critical-space
+  resourceVersion: "4715"
+  uid: 042cfc8d-0519-4c0c-85d0-b19e7697caa0
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: pay-service
+            port:
+              number: 8282
+        path: /pay
+        pathType: Exact
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.99.136.203

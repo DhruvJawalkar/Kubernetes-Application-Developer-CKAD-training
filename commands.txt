@@ -218,3 +218,25 @@ https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
 */
 kubectl create -f cron-job-definition.yaml
 kubectl get cronjob
+
+kubectl create -f service-definition.yaml
+kubectl get services
+kubectl describe service
+kubectl create -f Ingress-wear.yaml
+kubectl get ingress
+kubectl describe ingress ingress-wear-watch
+kubectl create ingress <ingress-name> --rule="host/path=service:port"
+kubectl create ingress ingress-test --rule="wear.my-online-store.com/wear*=wear-service:80"
+(https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-ingress-em-)
+kubectl get namespace
+kubectl get all -n=ingress-nginx
+kubectl get ingress ingress-wear-watch -n=app-space -o yaml
+kubectl edit ingress ingress-wear-watch -n=app-space
+kubectl get deploy -A
+kubectl get deploy -n ingress-nginx
+kubectl get pods -A
+kubectl get ingress -A
+kubectl get svc -n app-space
+kubectl create ingress ingress-pay -n critical-space --rule="/pay=pay-service:8282"
+kubectl describe ingress ingress-pay -n=critical-space
+kubectl create ingress -h
