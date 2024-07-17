@@ -240,3 +240,6 @@ kubectl get svc -n app-space
 kubectl create ingress ingress-pay -n critical-space --rule="/pay=pay-service:8282"
 kubectl describe ingress ingress-pay -n=critical-space
 kubectl create ingress -h
+
+kubectl get roles -n ingress-space
+kubectl get rolebindings -n ingress-space
