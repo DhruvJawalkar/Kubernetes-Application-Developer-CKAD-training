@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: "2024-07-19T22:39:41Z"
+  name: kube-proxy
+  namespace: kube-system
+  resourceVersion: "224"
+  uid: b98d2cd0-df90-4ee1-85d7-38c9f7443666
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - kube-proxy
+  resources:
+  - configmaps
+  verbs:
+  - get

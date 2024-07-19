@@ -254,3 +254,27 @@ kubectl create -f persistent-volume-claim-definition.yaml
 kubectl get persistentvolumeclaim
 kubectl delete persistentvolumeclaim myclaim
 kubectl exec webapp -- cat /log/app.log
+
+kubectl config view
+kubectl config view --kubeconfig=my-custom-config
+kubectl config use-context prod-user@production
+kubectl config use-context research --kubeconfig /root/my-kube-config
+kubectl config -h
+cat ca.crt | base64
+echo "LS0..bnJ" | base64 --decode
+echo $HOME
+la -la /root
+cat /root/.kube/config
+
+kubectl create -f developer-role.yaml
+kubectl create -f devuser-developer-binding.yaml
+kubectl get roles
+kubectl get rolebindings
+kubectl describe role developer
+kubectl describe rolebinding devuser-developer-binding
+kubectl auth can-i create deployments
+kubectl auth can-i delete nodes
+kubectl auth can-i create deployments --as dev-user
+kubectl auth can-i create pods --as dev-user --namespace test
+kubectl auth can-i get pods --as dev-user --namespace=default
+cat /etc/kubernetes/manifests/kube-apiserver.yaml

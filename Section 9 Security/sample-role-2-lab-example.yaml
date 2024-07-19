@@ -1,0 +1,27 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: "2024-07-19T22:52:25Z"
+  name: developer
+  namespace: blue
+  resourceVersion: "3689"
+  uid: 7872ddde-7d6d-48c1-994b-95ebef7540a3
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - blue-app
+  - dark-blue-app
+  resources:
+  - pods
+  verbs:
+  - get
+  - watch
+  - create
+  - delete
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - create
