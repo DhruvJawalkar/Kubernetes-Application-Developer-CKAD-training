@@ -247,3 +247,10 @@ kubectl get rolebindings -n ingress-space
 kubectl create -f network-policy-definition.yaml
 kubectl get networkpolicies -A
 kubectl describe networkpolicy payroll-policy
+
+kubectl create -f persistent-volume-definition.yaml
+kubectl get persistentvolume
+kubectl create -f persistent-volume-claim-definition.yaml
+kubectl get persistentvolumeclaim
+kubectl delete persistentvolumeclaim myclaim
+kubectl exec webapp -- cat /log/app.log
