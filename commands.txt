@@ -287,3 +287,8 @@ kubectl create -f cluster-admin-role-binding.yaml
 kubectl get clusterroles | grep -c "system:"
 kubectl get clusterrolebindings | grep -c "system:"
 
+kube-apiserver -h | grep enable-admission-plugins
+kubectl exec kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep enable-admission-plugins
+cat /etc/kubernetes/manifest/kube-apiserver.yaml
+ps -ef | grep kube-apiserver | grep admission-plugins
+kubectl create secret tls webhook-server-tls --cert=/root/keys/webhook-server-tls.crt --key=/root/keys/webhook-server-tls.key
