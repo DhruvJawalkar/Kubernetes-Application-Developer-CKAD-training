@@ -287,8 +287,23 @@ kubectl create -f cluster-admin-role-binding.yaml
 kubectl get clusterroles | grep -c "system:"
 kubectl get clusterrolebindings | grep -c "system:"
 
+//to check status of kube-apiserver pod
+curl -k 'https://localhost:6443/readyz?verbose&exclude=etcd'
 kube-apiserver -h | grep enable-admission-plugins
 kubectl exec kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep enable-admission-plugins
 cat /etc/kubernetes/manifest/kube-apiserver.yaml
 ps -ef | grep kube-apiserver | grep admission-plugins
 kubectl create secret tls webhook-server-tls --cert=/root/keys/webhook-server-tls.crt --key=/root/keys/webhook-server-tls.key
+
+kubectl api-resources
+kubectl api-resources | grep job
+kubectl api-versions
+kubectl convert -f ingress-old.yaml --output-version "networking.k8s.io/v1"
+
+//custom resource definition related
+kubectl create -f flightticket.yaml
+kubectl get flightticket
+kubectl delete -f flightticket.yaml
+kubectl api-resources
+kubectl get ft
+kubectl describe crd collectors.monitoring.controller
