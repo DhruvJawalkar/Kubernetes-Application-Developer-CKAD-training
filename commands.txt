@@ -49,13 +49,28 @@ kubectl create deployment --image=nginx nginx --dry-run -o yaml
 kubectl create deployment nginx --image=nginx --replicas=4
 kubectl scale deployment nginx --replicas=4
 kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3
+kubectl rollout status deployment/nginx-deployment
+kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1 --record
+kubectl edit deployment/nginx-deployment --record
+kubectl describe deployment
+kubectl rollout history deployment/nginx-deployment
+kubectl rollout history deployment/nginx-deployment --revision=4
+kubectl rollout undo deployment/nginx-deployment
+kubectl rollout undo deployment/nginx-deployment --to-revision=2
+kubectl scale deployment/nginx-deployment --replicas=10
+kubectl rollout pause deployment/nginx-deployment
+kubectl rollout resume deployment/nginx-deployment
 
 kubectl get all
 
 kubectl create namespace test-123 --dry-run -o yaml
 
 kubectl get namespaces
+kubectl run nginx --image=nginx --namespace=kube-public
 kubectl config set-context $(kubectl config current-context) --namespace=dev
+kubectl config set-context --current --namespace=kube-public
+kubectl api-resources --namespaced=true
+kubectl api-resources --namespaced=false
 kubectl get pods --namespace=research
 kubectl get pods -n=research
 kubectl run redis --image=redis -n=finance
@@ -69,6 +84,7 @@ kubectl run nginx --image=nginx --dry-run=client -o yaml > nginx-pod.yaml
 #Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379
 kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
 kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
+k create service clusterip redis-service --tcp=6379:6379 --dry-run=client -o yaml > redis-service.yaml
 
 #Create a Service named nginx of type NodePort to expose pod nginx's port 80 on port 30080 on the nodes:
 kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort --dry-run=client -o yaml
@@ -83,9 +99,11 @@ kubectl run custom-nginx --image=nginx --port=8080 --dry-run=client -o yaml
 kubectl run --help
 kubectl run httpd --image=httpd:alpine --port=80 --expose=true
 kubectl describe svc httpd
-
+k run redis --image=redis:alpine --labels=tier=db
+kubectl create deployment redis-deploy --image=redis --replicas=2 --namespace=dev-ns
 ----------------------------------------------------------------------------------------------------------------------------
 Docker commands:
+docker image list
 docker image ls
 docker build -t webapp-color .
 docker run -dp 127.0.0.1:8282:8080 webapp-color
